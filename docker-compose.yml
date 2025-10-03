@@ -1,29 +1,29 @@
 services:
-  my-container:
-    image: ghcr.io/open-webui/open-webui:0.6.32
-    container_name: open-webui
+  llama-open-webui:
+    image: "ghcr.io/open-webui/open-webui:0.6.32"
+    container_name: "open-webui"
     environment:
-      TZ: Europe/Paris
-      HOST_OS: Unraid
-      HOST_HOSTNAME: Tower
-      HOST_CONTAINERNAME: open-webui
-      OLLAMA_BASE_URL: http://10.10.1.20:11434
-      CA_TS_FALLBACK_DIR: /app/backend/data
+      TZ: "Europe/Paris"
+      HOST_OS: "Unraid"
+      HOST_HOSTNAME: "Tower"
+      HOST_CONTAINERNAME: "open-webui"
+      OLLAMA_BASE_URL: "http://10.10.1.20:11434"
+      CA_TS_FALLBACK_DIR: "/app/backend/data"
     labels:
       tsdproxy.enable: "true"
       tsdproxy.name: "llama-ui"
       tsdproxy.ephemeral: "true"
-      net.unraid.docker.managed: dockerman
-      net.unraid.docker.webui: http://[IP]:[PORT:8081]/
-      net.unraid.docker.icon: https://raw.githubusercontent.com/open-webui/open-webui/main/static/favicon.png
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8081]/"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/open-webui/open-webui/main/static/favicon.png"
     ports:
       - "8081:8080"
     volumes:
       - "${appdata_path}/ollama-webui:/app/backend/data"
 
-  ollama:
-    image: ollama/ollama:0.12.3
-    container_name: ollama
+  llama-ollama:
+    image: "ollama/ollama:0.12.3"
+    container_name: "ollama"
     ports:
       - "11434:11434"
     environment:
@@ -37,16 +37,15 @@ services:
       tsdproxy.enable: "true"
       tsdproxy.name: "ollama"
       tsdproxy.ephemeral: "true"
-      net.unraid.docker.managed: dockerman
-      net.unraid.docker.webui: 'http://[IP]:[PORT:11434]/'
-      net.unraid.docker.icon: 'https://ollama.ai/public/ollama.png'
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:11434]/"
+      net.unraid.docker.icon: "https://ollama.ai/public/ollama.png"
     volumes:
       - "${appdata_path}/ollama:/root/.ollama:rw"
     deploy:
       resources:
         reservations:
           devices:
-            - driver: nvidia
-              count: all  # Use all available GPUs
-              capabilities: [gpu]
-
+            - driver: "nvidia"
+              count: "all"
+              capabilities: ["gpu"]
