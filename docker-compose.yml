@@ -1,6 +1,6 @@
 services:
   my-container:
-    image: ghcr.io/open-webui/open-webui:main
+    image: ghcr.io/open-webui/open-webui:0.6.32
     container_name: open-webui
     environment:
       TZ: Europe/Paris
@@ -22,7 +22,7 @@ services:
       - "${appdata_path}/ollama-webui:/app/backend/data"
 
   ollama:
-    image: 'ollama/ollama'
+    image: ollama/ollama:0.12.3
     container_name: ollama
     ports:
       - "11434:11434"
