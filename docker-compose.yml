@@ -22,7 +22,7 @@ services:
       - "${appdata_path}/ollama-webui:/app/backend/data"
 
   llama-ollama:
-    image: "ollama/ollama:0.12.4"
+    image: "ollama/ollama:0.12.5"
     container_name: "ollama"
     ports:
       - "11434:11434"
